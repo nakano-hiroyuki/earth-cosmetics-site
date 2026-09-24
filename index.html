@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-a42713a1-90eb-46fe-bb93-bd273c14a4b9/styles.css">
+<script src="_ds/classical-a42713a1-90eb-46fe-bb93-bd273c14a4b9/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&amp;display=swap">
+<script src="./image-slot.js"></script>
+<style>
+:root{
+  --font-heading: "Cormorant Garamond", "Shippori Mincho", serif;
+  --font-body: "Lora", "Shippori Mincho", serif;
+  --edge: clamp(20px, 5vw, 64px);
+
+  /* 白＋ローズの配色へ（トークンを差し替え、ラマ構成は design system のまま） */
+  --color-bg: #fffdfd;
+  --color-surface: #f9eef1;
+  --color-text: #2b2328;
+  --color-divider: color-mix(in srgb, #2b2328 14%, transparent);
+  --color-accent: #cc7693;
+  --color-accent-2: #cc7693;
+
+  --color-accent-100: #fdf1f4;
+  --color-accent-200: #f9dce4;
+  --color-accent-300: #f0bfcf;
+  --color-accent-400: #e39db4;
+  --color-accent-500: #cc7693;
+  --color-accent-600: #b25a79;
+  --color-accent-700: #914461;
+  --color-accent-800: #6d3149;
+  --color-accent-900: #4a2131;
+
+  --color-accent-2-100: #fdf1f4;
+  --color-accent-2-200: #f9dce4;
+  --color-accent-2-300: #f0bfcf;
+  --color-accent-2-400: #e39db4;
+  --color-accent-2-500: #cc7693;
+  --color-accent-2-600: #b25a79;
+  --color-accent-2-700: #914461;
+  --color-accent-2-800: #6d3149;
+  --color-accent-2-900: #4a2131;
+
+  --color-ink-deep: #33232b;
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #4a2131 10%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #4a2131 12%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #4a2131 16%, transparent);
+}
+.plate{filter:saturate(0.94) contrast(1.03) hue-rotate(-6deg)}
+body{margin:0;font-feature-settings:'lnum' 1;text-wrap:pretty;-webkit-font-smoothing:antialiased;background:var(--color-bg)}
+a{color:var(--color-accent-700);text-decoration:none}
+a:hover{color:var(--color-accent-600)}
+@keyframes earth-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);min-height:100vh">
+
+  <div class="nav" style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:var(--space-6);padding:var(--space-3) var(--edge);margin-bottom:-69px;background:transparent;border-bottom:0">
+    <a href="#" onClick="{{ goTop }}" style="display:flex;align-items:baseline;gap:11px;margin-right:auto;color:var(--color-text)">
+      <span style="font-family:var(--font-heading);font-size:26px;letter-spacing:0.34em">EARTH</span>
+      <span style="font-size:10px;letter-spacing:0.24em;color:var(--color-text)">アース化粧品</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:var(--space-6);flex-wrap:wrap">
+      <a href="#" onClick="{{ goTop }}" style="font-size:13px;letter-spacing:0.14em;color:var(--color-text)" style-hover="color:var(--color-accent-700)">TOP<sc-if value="{{ isTop }}"><span style="display:block;height:1px;background:var(--color-accent);margin-top:5px"></span></sc-if></a>
+      <a href="#" onClick="{{ goProducts }}" style="font-size:13px;letter-spacing:0.14em;color:var(--color-text)" style-hover="color:var(--color-accent-700)">商品一覧<sc-if value="{{ isProducts }}"><span style="display:block;height:1px;background:var(--color-accent);margin-top:5px"></span></sc-if></a>
+      <a href="#" onClick="{{ goCompany }}" style="font-size:13px;letter-spacing:0.14em;color:var(--color-text)" style-hover="color:var(--color-accent-700)">企業概要<sc-if value="{{ isCompany }}"><span style="display:block;height:1px;background:var(--color-accent);margin-top:5px"></span></sc-if></a>
+      <a href="#" onClick="{{ goContact }}" style="font-size:13px;letter-spacing:0.14em;color:var(--color-text)" style-hover="color:var(--color-accent-700)">お問合せ<sc-if value="{{ isContact }}"><span style="display:block;height:1px;background:var(--color-accent);margin-top:5px"></span></sc-if></a>    </div>
+  </div>
+
+  <sc-if value="{{ isTop }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="TOP" data-page-anim="1">
+    <section style="position:relative;background-image:url('assets/hero.jpg');background-size:cover;background-position:14% center;background-repeat:no-repeat">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg, color-mix(in srgb, #fffdfd 0%, transparent) 0%, color-mix(in srgb, #fffdfd 16%, transparent) 30%, color-mix(in srgb, #fffdfd 76%, transparent) 50%, #fffdfd 62%);pointer-events:none"></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:132px;background:linear-gradient(180deg, color-mix(in srgb, #fffdfd 80%, transparent) 0%, color-mix(in srgb, #fffdfd 48%, transparent) 55%, transparent 100%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1240px;margin:0 auto;padding:calc(69px + var(--space-6)) var(--edge) var(--space-6);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-8) clamp(16px,3vw,48px);align-items:center;min-height:100svh">
+      <div></div>
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700);font-feature-settings:'tnum' 1,'lnum' 1">Est. 1927 — Kyoto</span>
+        <h1 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,3.2vw,46px);line-height:1.45;letter-spacing:0.03em;margin:var(--space-6) 0 0">
+          <span style="display:block">すべての女性が<br>輝くために。<br></span>
+          <span style="display:block"><br></span>
+        </h1>
+        <p style="font-size:16px;line-height:2.05;max-width:44ch;margin:var(--space-6) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 82%, transparent)">肌が目覚めるたびに、もっと好きな自分に出会える。</p>
+      </div>
+      </div>
+    </section>
+
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-8) var(--space-6)">
+        <div>
+          <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(32px,3.3vw,48px);line-height:1.1;margin:0;font-feature-settings:'tnum' 1,'lnum' 1;color:var(--color-accent)">1927年</p>
+          <p style="font-size:12px;letter-spacing:0.14em;line-height:1.9;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">京都・室町で創業</p>
+        </div>
+        <div>
+          <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(32px,3.3vw,48px);line-height:1.1;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">32ヵ国</p>
+          <p style="font-size:12px;letter-spacing:0.14em;line-height:1.9;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">展開する国と地域</p>
+        </div>
+        <div>
+          <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(32px,3.3vw,48px);line-height:1.1;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">214名</p>
+          <p style="font-size:12px;letter-spacing:0.14em;line-height:1.9;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">EARTH 基礎研究所の研究員</p>
+        </div>
+        <div>
+          <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(32px,3.3vw,48px);line-height:1.1;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">98.4%</p>
+          <p style="font-size:12px;letter-spacing:0.14em;line-height:1.9;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">容器に占める再生・再利用素材</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Collections</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--space-8) calc(var(--space-8) * 1.3);margin-top:var(--space-6)">
+        <div style="padding-right:var(--space-6);border-right:1px solid var(--color-divider)">
+          <h2 style="font-family:var(--font-heading);font-weight:400;font-size:25px;line-height:1.55;margin:0;letter-spacing:0.04em">スキンケア</h2>
+          <p style="font-size:14.5px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">水のとおり道を整える基礎化粧。とろみを競わず、翌朝のやわらかさで応えます。</p>
+        </div>
+        <div style="padding-right:var(--space-6);border-right:1px solid var(--color-divider)">
+          <h2 style="font-family:var(--font-heading);font-weight:400;font-size:25px;line-height:1.55;margin:0;letter-spacing:0.04em">メイクアップ</h2>
+          <p style="font-size:14.5px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">絹を一枚重ねたような薄膜。肌本来の美しさ、光の返りかたを整える化粧です。</p>
+        </div>
+        <div style="padding-right:var(--space-6);border-right:1px solid var(--color-divider)">
+          <h2 style="font-family:var(--font-heading);font-weight:400;font-size:25px;line-height:1.55;margin:0;letter-spacing:0.04em">フレグランス</h2>
+          <p style="font-size:14.5px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">雨上がりの木肌、湿った石畳。京都の朝の空気を香料十七種で表現しました。</p>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-heading);font-weight:400;font-size:25px;line-height:1.55;margin:0;letter-spacing:0.04em">ヘアケア</h2>
+          <p style="font-size:14.5px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">硬度の違う水でも泡が崩れない設計。洗い上がりは軽く、指どおりだけが残ります。</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap">
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:34px;letter-spacing:0.04em;margin:0">今季の三品</h2>
+        <a href="#" onClick="{{ goProducts }}" style="font-size:12px;letter-spacing:0.14em">商品一覧を見る →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--space-6);margin-top:var(--space-6)">
+        <sc-for list="{{ featured }}" as="p" hint-placeholder-count="3">
+          <article class="card" data-lift="1" style="gap:var(--space-3);padding:var(--space-4);transition:transform 0.5s cubic-bezier(0.2,0.7,0.2,1), border-color 0.5s ease" style-hover="transform:translateY(-4px);border-color:color-mix(in srgb, var(--color-accent) 55%, transparent)">
+            <figure class="plate" style="margin:0">
+              <image-slot id="{{ p.slotId }}" shape="rect" placeholder="商品写真" style="width:100%;aspect-ratio:1/1"></image-slot>
+            </figure>
+            <span class="card-kicker" style="letter-spacing:0.2em">{{ p.cat }}</span>
+            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:22px;letter-spacing:0.04em;line-height:1.5;margin:0">{{ p.name }}</h3>
+            <p style="font-size:13.5px;line-height:1.95;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">{{ p.note }}</p>
+            <p style="font-size:12px;letter-spacing:0.08em;margin:0;font-feature-settings:'tnum' 1,'lnum' 1;color:color-mix(in srgb, var(--color-text) 70%, transparent)">{{ p.size }}<sc-if value="{{ showPrices }}"><span> ／ {{ p.price }}</span></sc-if></p>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge) calc(var(--space-8) * 1.6)">
+      <figure style="margin:0">
+        <blockquote style="font-family:var(--font-heading);font-weight:400;font-size:clamp(24px,2.6vw,34px);line-height:1.75;letter-spacing:0.04em;max-width:30ch;margin:0">「自分らしく、常に美しくあり続ける挑戦と取り組みをご覧ください。」</blockquote>
+        <figcaption style="font-size:14px;line-height:2;margin:var(--space-6) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">— EARTH 基礎研究所 所長　中垣 志乃</figcaption>
+      </figure>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isProducts }}">
+  <div data-screen-label="商品一覧" data-page-anim="1" style="padding-top:69px;background-image:linear-gradient(color-mix(in srgb, #fffdfd 60%, transparent), color-mix(in srgb, #fffdfd 60%, transparent)), url('assets/marble.jpg');background-size:auto, 1200px auto;background-repeat:repeat">
+    <section style="max-width:1240px;margin:0 auto;padding:calc(var(--space-8) * 1.4) var(--edge) var(--space-6)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Products</span>
+      <h1 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(34px,4.4vw,58px);letter-spacing:0.04em;line-height:1.35;margin:var(--space-4) 0 0">商品一覧</h1>
+      <p style="font-size:15px;line-height:2.05;max-width:52ch;margin:var(--space-4) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 80%, transparent)">全品、京都・山科の自社工場で充填しています。百貨店カウンターではテスターとタッチアップをご用意しています。</p>
+      <div style="display:flex;align-items:center;gap:var(--space-6);flex-wrap:wrap;margin-top:var(--space-8);border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);padding:var(--space-3) 0">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+          <a href="#" onClick="{{ c.on }}" style="font-size:13px;letter-spacing:0.14em;color:var(--color-text)">{{ c.label }}<sc-if value="{{ c.active }}"><span style="display:block;height:1px;background:var(--color-accent);margin-top:5px"></span></sc-if></a>
+        </sc-for>
+        <span style="margin-left:auto;font-size:12px;letter-spacing:0.1em;font-feature-settings:'tnum' 1,'lnum' 1;color:color-mix(in srgb, var(--color-text) 60%, transparent)">{{ count }}</span>
+      </div>
+    </section>
+
+    <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1240px;margin:0 auto;padding:0 var(--edge) calc(var(--space-8) * 1.6)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:calc(var(--space-8) * 1.2) var(--space-6)">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+          <article data-reveal="1" style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <figure class="plate" style="margin:0;transition:transform 0.6s cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.012)">
+              <image-slot id="{{ p.slotId }}" shape="rect" placeholder="商品写真" style="width:100%;aspect-ratio:3/4"></image-slot>
+            </figure>
+            <span style="font-size:10px;letter-spacing:0.22em;color:var(--color-accent-700)">{{ p.cat }}</span>
+            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:23px;letter-spacing:0.04em;line-height:1.5;margin:0">{{ p.name }}</h3>
+            <p style="font-size:13.5px;line-height:1.95;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">{{ p.note }}</p>
+            <p style="font-size:12px;letter-spacing:0.08em;margin:0;font-feature-settings:'tnum' 1,'lnum' 1;color:color-mix(in srgb, var(--color-text) 70%, transparent)">{{ p.size }}<sc-if value="{{ showPrices }}"><span> ／ {{ p.price }}</span></sc-if></p>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{ isList }}">
+    <section style="max-width:1240px;margin:0 auto;padding:0 var(--edge) calc(var(--space-8) * 1.6)">
+      <table class="table" style="width:100%">
+        <thead>
+          <tr><th style="text-align:left">商品名</th><th style="text-align:left">カテゴリー</th><th style="text-align:left">内容量</th><th style="text-align:left">価格（税込）</th></tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+            <tr>
+              <td><span style="font-family:var(--font-heading);font-size:19px;letter-spacing:0.04em">{{ p.name }}</span></td>
+              <td style="font-size:13px">{{ p.cat }}</td>
+              <td style="font-size:13px;font-feature-settings:'tnum' 1,'lnum' 1">{{ p.size }}</td>
+              <td style="font-size:13px;font-feature-settings:'tnum' 1,'lnum' 1"><sc-if value="{{ showPrices }}"><span>{{ p.price }}</span></sc-if></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isCompany }}">
+  <div data-screen-label="企業概要" data-page-anim="1">
+    <section style="position:relative;display:flex;align-items:flex-end;min-height:min(86svh,820px);background-image:url('assets/company-hero.png');background-size:cover;background-position:center 40%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, color-mix(in srgb, #fffdfd 88%, transparent) 0px, color-mix(in srgb, #fffdfd 55%, transparent) 110px, transparent 190px, transparent 40%, color-mix(in srgb, #2a1a21 45%, transparent) 68%, color-mix(in srgb, #2a1a21 70%, transparent) 100%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg, color-mix(in srgb, #2a1a21 80%, transparent) 0%, color-mix(in srgb, #2a1a21 62%, transparent) 38%, transparent 70%);-webkit-mask-image:linear-gradient(180deg, transparent 35%, #000 62%);mask-image:linear-gradient(180deg, transparent 35%, #000 62%);pointer-events:none"></div>
+      <div style="position:relative;width:100%;max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge) calc(var(--space-8) * 1.2)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#fffdfd">Company</span>
+      <h1 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(34px,4.4vw,58px);letter-spacing:0.04em;line-height:1.35;margin:var(--space-4) 0 0;color:#fffdfd">企業概要</h1>
+      <p style="font-size:15px;line-height:2.05;max-width:54ch;margin:var(--space-4) 0 0;text-align:justify;color:#fffdfd">株式会社EARTH化粧品は、1927年に京都で創業した化粧品メーカーです。基礎化粧品、メイクアップ、フレグランス、ヘアケアの四領域を、自社処方・自社充填で展開しています。</p>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Philosophy — 経営理念</span>
+      <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.8vw,38px);letter-spacing:0.04em;line-height:1.6;margin:var(--space-6) 0 0">自然にも肌にも優しいもの<br>であなたらしく。</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--space-6) calc(var(--space-8) * 1.3);margin-top:var(--space-8)">
+        <div style="padding-right:var(--space-6);border-right:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">産地まで遡る</h3>
+          <p style="font-size:14px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">全原料の産地・収穫年・精製工程を記録し、商品ごとに開示しています。</p>
+        </div>
+        <div style="padding-right:var(--space-6);border-right:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">引き算の処方</h3>
+          <p style="font-size:14px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">機能を足すより、不要な成分を削る。平均処方成分数は業界平均の約六割です。</p>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">百年の帳面</h3>
+          <p style="font-size:14px;line-height:2.05;margin:var(--space-3) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 78%, transparent)">創業以来の配合記録をすべて保管し、現在の処方開発の起点としています。</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:calc(69px + var(--space-6)) var(--edge) var(--space-6);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-8) clamp(32px,5vw,80px);align-items:start">
+      <figure class="plate" style="margin:0">
+        <image-slot id="earth-ceo" shape="rect" placeholder="代表取締役 ポートレート" style="width:100%;aspect-ratio:4/5"></image-slot>
+      </figure>
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Message — 代表メッセージ</span>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:30px;letter-spacing:0.04em;line-height:1.6;margin:var(--space-6) 0 0">急がない会社でありたい。</h2>
+        <p style="font-size:15px;line-height:2.05;margin:var(--space-6) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 82%, transparent)">創業者・白石露子は、呉服商の家に生まれ、染めの水が肌に与える差に気づいた人でした。1927年、京都・室町の二階で調合を始め、配合をひとつずつ帳面に書き残しました。その帳面は今も研究所にあり、私たちの処方はそこから続いています。</p>
+        <p style="font-size:15px;line-height:2.05;margin:var(--space-4) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 82%, transparent)">化粧品は、毎朝くりかえし肌に触れるものです。だからこそ新しさを急がず、十年後も同じ品質で出せる処方だけを製品にします。</p>
+        <p style="font-size:14px;line-height:2;margin:var(--space-6) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">代表取締役社長　白石 燈</p>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Profile — 会社概要</span>
+      <table class="table" style="width:100%;margin-top:var(--space-6)">
+        <tbody>
+          <sc-for list="{{ profile }}" as="r" hint-placeholder-count="8">
+            <tr>
+              <th style="text-align:left;width:26%;white-space:nowrap">{{ r.k }}</th>
+              <td style="font-size:14px;line-height:1.9">{{ r.v }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">History — 沿革</span>
+      <div style="margin-top:var(--space-6);border-top:1px solid var(--color-divider)">
+        <sc-for list="{{ history }}" as="h" hint-placeholder-count="7">
+          <div style="display:grid;grid-template-columns:minmax(90px,120px) minmax(0,1fr);gap:var(--space-6);padding:var(--space-4) 0;border-bottom:1px solid var(--color-divider)">
+            <span style="font-family:var(--font-heading);font-size:22px;letter-spacing:0.04em;font-feature-settings:'tnum' 1,'lnum' 1;color:var(--color-accent-700)">{{ h.y }}</span>
+            <p style="font-size:14.5px;line-height:2;margin:0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">{{ h.t }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:calc(69px + var(--space-6)) var(--edge) var(--space-6);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-8) clamp(32px,5vw,80px);align-items:center">
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">R&amp;D — 研究開発</span>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:30px;letter-spacing:0.04em;line-height:1.6;margin:var(--space-6) 0 0">京都・山科／EARTH 基礎研究所</h2>
+        <p style="font-size:15px;line-height:2.05;margin:var(--space-6) 0 0;text-align:justify;color:color-mix(in srgb, var(--color-text) 82%, transparent)">角層の水分保持、皮脂膜の再形成、そして香りの残りかた。三つの基礎研究チームに214名が所属し、年間の処方試作は約4,800件にのぼります。製品化に至るのはそのうち十数件です。</p>
+        <div style="display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:var(--space-8);margin-top:var(--space-8)">
+          <div><p style="font-family:var(--font-heading);font-size:34px;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">4,800件<br></p><p style="font-size:11.5px;letter-spacing:0.12em;margin:var(--space-2) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">年間処方試作数</p></div>
+          <div><p style="font-family:var(--font-heading);font-size:34px;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">38ヵ所<br></p><p style="font-size:11.5px;letter-spacing:0.12em;margin:var(--space-2) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">共同研究機関</p></div>
+          <div><p style="font-family:var(--font-heading);font-size:34px;margin:0;font-feature-settings:'tnum' 1,'lnum' 1">0件</p><p style="font-size:11.5px;letter-spacing:0.12em;margin:var(--space-2) 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">動物実験の実施</p></div>
+        </div>
+      </div>
+      <figure class="plate" style="margin:0">
+        <image-slot id="earth-lab" shape="rect" placeholder="研究所の写真（横位置）" style="width:100%;aspect-ratio:4/3"></image-slot>
+      </figure>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Sustainability — サステナビリティ</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-6);margin-top:var(--space-6)">
+        <div class="card" style="padding:var(--space-4);gap:var(--space-2)">
+          <span class="card-kicker" style="letter-spacing:0.2em">容器</span>
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;letter-spacing:0.04em;margin:0">2030年までに全品リフィル対応</h3>
+          <p style="font-size:13.5px;line-height:1.95;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">現在の対応率は72%。ガラス外装は店頭回収し、再生ガラスとして再充填します。</p>
+        </div>
+        <div class="card" style="padding:var(--space-4);gap:var(--space-2)">
+          <span class="card-kicker" style="letter-spacing:0.2em">原料</span>
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;letter-spacing:0.04em;margin:0">契約農地からの直接調達</h3>
+          <p style="font-size:13.5px;line-height:1.95;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">植物原料の64%を、国内18か所の契約農地から直接調達しています。</p>
+        </div>
+        <div class="card" style="padding:var(--space-4);gap:var(--space-2)">
+          <span class="card-kicker" style="letter-spacing:0.2em">工場</span>
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;letter-spacing:0.04em;margin:0">再生可能エネルギー100%</h3>
+          <p style="font-size:13.5px;line-height:1.95;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">山科工場・大津第二工場の使用電力は2024年より再生可能エネルギーです。</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section data-reveal="1" style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge) calc(var(--space-8) * 1.6)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Locations — 拠点一覧</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:var(--space-6) var(--space-8);margin-top:var(--space-6)">
+        <sc-for list="{{ locations }}" as="l" hint-placeholder-count="6">
+          <div style="padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;letter-spacing:0.06em;margin:0">{{ l.name }}</h3>
+            <p style="font-size:13px;line-height:1.95;margin:var(--space-2) 0 0;color:color-mix(in srgb, var(--color-text) 74%, transparent)">{{ l.addr }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isContact }}">
+  <div data-screen-label="お問合せ" data-page-anim="1">
+    <section style="position:relative;display:flex;align-items:flex-end;min-height:min(86svh,820px);background-image:url('assets/contact-hero.png');background-size:cover;background-position:center 30%">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, color-mix(in srgb, #fffdfd 55%, transparent) 0px, transparent 140px, transparent 50%, color-mix(in srgb, #fffdfd 55%, transparent) 78%, color-mix(in srgb, #fffdfd 80%, transparent) 100%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg, color-mix(in srgb, #fffdfd 78%, transparent) 0%, color-mix(in srgb, #fffdfd 55%, transparent) 38%, transparent 64%);-webkit-mask-image:linear-gradient(180deg, transparent 45%, #000 70%);mask-image:linear-gradient(180deg, transparent 45%, #000 70%);pointer-events:none"></div>
+      <div style="position:relative;width:100%;max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge) calc(var(--space-8) * 1.2)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">Contact</span>
+      <h1 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(34px,4.4vw,58px);letter-spacing:0.04em;line-height:1.35;margin:var(--space-4) 0 0;color:var(--color-text)">お問合せ</h1>
+      <p style="font-size:15px;line-height:2.05;max-width:40ch;margin:var(--space-4) 0 0;text-align:justify;color:var(--color-text)">商品のご相談、店舗のご案内、法人・取材、採用に関するお問合せを承ります。内容により回答までに3営業日ほどいただく場合があります。</p>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:calc(69px + var(--space-6)) var(--edge) var(--space-6);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-8) clamp(32px,5vw,80px);align-items:start">
+      <div>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:28px;letter-spacing:0.04em;margin:0">お問合せフォーム</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-top:var(--space-6);max-width:540px">
+          <div>
+            <label style="display:block;font-size:12px;letter-spacing:0.12em;margin-bottom:var(--space-2)">お問合せ種別</label>
+            <div style="display:flex;gap:var(--space-2);flex-wrap:wrap">
+              <sc-for list="{{ subjects }}" as="s" hint-placeholder-count="4">
+                <a href="#" onClick="{{ s.on }}" class="btn btn-ghost" style="font-size:12px;letter-spacing:0.1em">{{ s.label }}<sc-if value="{{ s.active }}"></sc-if></a>
+              </sc-for>
+            </div>
+          </div>
+          <div class="field">
+            <label for="earth-name" style="display:block;font-size:12px;letter-spacing:0.12em;margin-bottom:var(--space-2)">お名前</label>
+            <input id="earth-name" class="input" type="text" placeholder="山田 花子" style="width:100%;padding:var(--space-3)">
+          </div>
+          <div class="field">
+            <label for="earth-mail" style="display:block;font-size:12px;letter-spacing:0.12em;margin-bottom:var(--space-2)">メールアドレス</label>
+            <input id="earth-mail" class="input" type="email" placeholder="hanako@example.com" style="width:100%;padding:var(--space-3)">
+          </div>
+          <div class="field">
+            <label for="earth-tel" style="display:block;font-size:12px;letter-spacing:0.12em;margin-bottom:var(--space-2)">電話番号（任意）</label>
+            <input id="earth-tel" class="input" type="tel" placeholder="075-000-0000" style="width:100%;padding:var(--space-3)">
+          </div>
+          <div class="field">
+            <label for="earth-body" style="display:block;font-size:12px;letter-spacing:0.12em;margin-bottom:var(--space-2)">お問合せ内容</label>
+            <textarea id="earth-body" class="input" rows="6" placeholder="ご相談の内容をご記入ください。" style="width:100%;padding:var(--space-3);font-family:var(--font-body);line-height:1.9;resize:vertical"></textarea>
+          </div>
+          <p style="font-size:12px;line-height:1.9;margin:0;color:color-mix(in srgb, var(--color-text) 66%, transparent)">送信により、個人情報の取り扱いに同意いただいたものとみなします。</p>
+          <div style="display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap">
+            <a href="#" onClick="{{ submit }}" class="btn btn-primary" style="font-size:13px;letter-spacing:0.12em">送信する</a>
+            <sc-if value="{{ sent }}"><span style="font-size:13px;letter-spacing:0.06em;color:var(--color-accent-700)">送信しました。3営業日以内にご返信します。</span></sc-if>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:var(--space-8)">
+        <div style="padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">お電話でのお問合せ</h3>
+          <p style="font-family:var(--font-heading);font-size:30px;letter-spacing:0.06em;margin:var(--space-3) 0 0;font-feature-settings:'tnum' 1,'lnum' 1">0120₋1927₋84</p>
+          <p style="font-size:13px;line-height:1.95;margin:var(--space-2) 0 0;color:color-mix(in srgb, var(--color-text) 74%, transparent)">お客さま相談室／平日 10:00–17:00（土日祝・年末年始を除く）</p>
+        </div>
+        <div style="padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">店舗・カウンター案内</h3>
+          <p style="font-size:13px;line-height:1.95;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 74%, transparent)">全国34の百貨店カウンターと、京都・室町の本店でお試しいただけます。タッチアップのご予約は各店へ直接お願いします。</p>
+        </div>
+        <div style="padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">法人／取材窓口</h3>
+          <p style="font-size:13px;line-height:1.95;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 74%, transparent)">卸・OEM・広報取材のご相談：press@earth-cosme.example<br>受付 平日 10:00–18:00</p>
+        </div>
+        <div style="padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+          <h3 style="font-family:var(--font-heading);font-weight:400;font-size:21px;letter-spacing:0.06em;margin:0">採用に関するお問合せ</h3>
+          <p style="font-size:13px;line-height:1.95;margin:var(--space-3) 0 0;color:color-mix(in srgb, var(--color-text) 74%, transparent)">新卒・中途採用、ビューティーアドバイザー職：recruit@earth-cosme.example</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="hr" style="margin:0">
+
+    <section style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge) calc(var(--space-8) * 1.6)">
+      <span style="display:block;font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--color-accent-700)">FAQ — よくあるご質問</span>
+      <div style="margin-top:var(--space-6);border-top:1px solid var(--color-divider);max-width:840px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+          <div style="border-bottom:1px solid var(--color-divider)">
+            <a href="#" onClick="{{ f.on }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-4);padding:var(--space-4) 0;color:var(--color-text)">
+              <span style="font-family:var(--font-heading);font-size:20px;letter-spacing:0.04em;line-height:1.6">{{ f.q }}</span>
+              <span style="font-size:16px;color:var(--color-accent);line-height:1.6">{{ f.mark }}</span>
+            </a>
+            <sc-if value="{{ f.open }}">
+              <p style="font-size:14px;line-height:2.05;margin:0;padding:0 0 var(--space-4);max-width:62ch;text-align:justify;color:color-mix(in srgb, var(--color-text) 80%, transparent)">{{ f.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <div style="background: linear-gradient(180deg, #350510, #571a2a); color: var(--color-bg); border-top: 1px solid color-mix(in srgb, var(--color-accent-300) 28%, transparent)">
+    <div style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--edge);display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap">
+      <div style="display:flex;align-items:baseline;gap:11px">
+        <span style="font-family:var(--font-heading);font-size:20px;letter-spacing:0.34em">EARTH</span>
+        <span style="font-size:11px;letter-spacing:0.2em;color:color-mix(in srgb, var(--color-bg) 68%, transparent)">株式会社</span>
+      </div>
+      <div style="display:flex;gap:var(--space-6);flex-wrap:wrap">
+        <a href="#" onClick="{{ goProducts }}" style="font-size:12px;letter-spacing:0.12em;color:var(--color-accent-200)" style-hover="color:var(--color-bg)">商品一覧</a>
+        <a href="#" onClick="{{ goCompany }}" style="font-size:12px;letter-spacing:0.12em;color:var(--color-accent-200)" style-hover="color:var(--color-bg)">企業概要</a>
+        <a href="#" onClick="{{ goContact }}" style="font-size:12px;letter-spacing:0.12em;color:var(--color-accent-200)" style-hover="color:var(--color-bg)">お問合せ</a>
+      </div>
+    </div>
+    <div style="max-width:1240px;margin:0 auto;padding:0 var(--edge) var(--space-8);display:flex;justify-content:center;gap:var(--space-3);flex-wrap:wrap">
+      <span style="font-size:11px;letter-spacing:0.1em;text-align:center;color:color-mix(in srgb, var(--color-bg) 62%, transparent)">EARTH化粧品　© 2026 EARTH Cosmetics Co., Ltd.（架空の企業です）</span>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;商品表示&quot;},&quot;productView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;グリッド&quot;,&quot;一覧表&quot;],&quot;default&quot;:&quot;グリッド&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;商品表示&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;演出&quot;}}">
+const PRODUCTS = [
+  { cat: "スキンケア", name: "エッセンスローション ", size: "180mL", price: "¥13,200", note: "水のとおり道を整える化粧水。とろみを足さず、翌朝のやわらかさで応えます。" },
+  { cat: "スキンケア", name: "セラム ", size: "30mL", price: "¥28,600", note: "角層の水分保持に向けた美容液。成分は九種のみ、香料は無配合です。" },
+  { cat: "スキンケア", name: "クリーム 月白", size: "50g", price: "¥38,500", note: "皮脂膜の再形成を助ける夜用クリーム。伸ばした直後に膜が消えます。" },
+  { cat: "メイクアップ", name: "ファンデーション", size: "30mL・SPF25", price: "¥11,000", note: "絹を一枚重ねたような薄膜。肌本来の美しさ、光の返りかたを整えます。" },
+  { cat: "メイクアップ", name: "リップカラー", size: "3.5g・12色", price: "¥6,600", note: "染料を使わず顔料のみで発色。落としたあとに色残りがありません。" },
+  { cat: "メイクアップ", name: "アイパレット", size: "6色", price: "¥9,900", note: "墨の濃淡だけで組んだ六色。ラメは一段のみに抑えています。" },
+  { cat: "フレグランス", name: "オードパルファン ", size: "50mL", price: "¥24,200", note: "雨上がりの木肌と湿った石畳。香料十七種で京都の朝を表現ました。" },
+  { cat: "フレグランス", name: "オードパルファン 白椿", size: "50mL", price: "¥24,200", note: "白い椿の上品な香り。癒しと華やかさを与えてくれます。" },
+  { cat: "フレグランス", name: "ソリッドパルファン ", size: "8g", price: "¥13,200", note: "蜜蠟の練り香水。手首の熱でゆっくり開き、拡散を求めません。" },
+  { cat: "ヘアケア", name: "シャンプー ", size: "300mL", price: "¥7,150", note: "硬度の違う水でも泡が崩れない設計。洗い上がりは軽く仕上がります。" },
+  { cat: "ヘアケア", name: "トリートメント ", size: "250g", price: "¥8,250", note: "被膜で覆わず、内側の水分を抱える処方。指どおりだけが残ります。" },
+  { cat: "ヘアケア", name: "ヘアオイル 椿", size: "100mL", price: "¥9,900", note: "国産椿油を主体に、乾いた髪にも朝の仕上げにも。香りは極小量。" }
+].map((p, i) => Object.assign({}, p, { slotId: "earth-p" + (i + 1) }));
+
+class Component extends DCLogic {
+  state = { page: "top", cat: "すべて", subject: "商品について", sent: false, faq: -1 };
+
+  go(page) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ page: page, sent: false });
+      if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  }
+
+  componentDidMount() { this.bindReveal(); }
+  componentDidUpdate() { this.bindReveal(); }
+
+  bindReveal() {
+    if (this.props.animate === false || typeof IntersectionObserver === "undefined") return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const root = this.el || document;
+    document.querySelectorAll("[data-page-anim]").forEach((n) => {
+      if (n.dataset.animDone) return;
+      n.dataset.animDone = "1";
+      n.style.animation = "earth-rise 0.7s cubic-bezier(0.2,0.7,0.2,1) both";
+    });
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.style.opacity = "1";
+            en.target.style.transform = "none";
+            this.io.unobserve(en.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    }
+    document.querySelectorAll("[data-reveal]").forEach((n) => {
+      if (n.dataset.revealBound) return;
+      n.dataset.revealBound = "1";
+      n.style.transition = "opacity 0.8s ease, transform 0.8s cubic-bezier(0.2,0.7,0.2,1)";
+      const box = n.getBoundingClientRect();
+      if (box.top > window.innerHeight * 0.9) {
+        n.style.opacity = "0";
+        n.style.transform = "translateY(22px)";
+      }
+      this.io.observe(n);
+    });
+  }
+
+  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+
+  renderVals() {
+    const page = this.state.page;
+    const showPrices = this.props.showPrices !== false;
+    const view = this.props.productView || "グリッド";
+    const activeCat = this.state.cat;
+    const products = activeCat === "すべて" ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeCat);
+    const catNames = ["すべて", "スキンケア", "メイクアップ", "フレグランス", "ヘアケア"];
+    const subjectNames = ["商品について", "店舗・カウンター", "法人／取材", "採用について"];
+    const faqData = [
+      { q: "サンプルの取り寄せはできますか。", a: "お客さま相談室にご連絡いただくか、百貨店カウンターでお申し出ください。スキンケア三品はサシェでのご用意があります。" },
+      { q: "使用期限の目安を教えてください。", a: "未開封で製造から3年、開封後は6か月を目安にお使いください。容器底面に製造ロットを記載しています。" },
+      { q: "リフィル（詰め替え）に対応していますか。", a: "現在72%の製品がリフィルに対応しています。空容器は百貨店カウンターと本店で回収し、再生ガラスとして再充填します。" },
+      { q: "動物実験は行っていますか。", a: "自社および委託先を含め、製品・原料のいずれにおいても動物実験は実施していません。" },
+      { q: "海外への配送はできますか。", a: "海外では32の国と地域の正規取扱店でお取り扱いがあります。お近くの店舗はお客さま相談室でご案内します。" }
+    ];
+    return {
+      isTop: page === "top",
+      isProducts: page === "products",
+      isCompany: page === "company",
+      isContact: page === "contact",
+      goTop: this.go("top"),
+      goProducts: this.go("products"),
+      goCompany: this.go("company"),
+      goContact: this.go("contact"),
+      showPrices: showPrices,
+      isGrid: view === "グリッド",
+      isList: view === "一覧表",
+      featured: [PRODUCTS[1], PRODUCTS[3], PRODUCTS[6]],
+      products: products,
+      count: products.length + "件",
+      cats: catNames.map((label) => ({
+        label: label,
+        active: label === activeCat,
+        on: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ cat: label }); }
+      })),
+      subjects: subjectNames.map((label) => ({
+        label: label,
+        active: label === this.state.subject,
+        on: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ subject: label }); }
+      })),
+      sent: this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      faqs: faqData.map((f, i) => ({
+        q: f.q,
+        a: f.a,
+        open: this.state.faq === i,
+        mark: this.state.faq === i ? "−" : "＋",
+        on: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ faq: this.state.faq === i ? -1 : i }); }
+      })),
+      profile: [
+        { k: "商号", v: "株式会社EARTH化粧品（EARTH Cosmetics Co., Ltd.）" },
+        { k: "創業", v: "1927年4月　京都市中京区室町" },
+        { k: "設立", v: "1951年3月" },
+        { k: "代表者", v: "代表取締役社長　白石 燈" },
+        { k: "資本金", v: "84億6,000万円" },
+        { k: "売上高", v: "3,421億円（2025年12月期・連結）" },
+        { k: "従業員数", v: "6,180名（2026年1月現在・連結）" },
+        { k: "事業内容", v: "化粧品・フレグランス・ヘアケア製品の研究開発、製造および販売" },
+        { k: "本社", v: "京都市中京区室町通四条上る　EARTH ビル" }
+      ],
+      history: [
+        { y: "1927", t: "白石露子が京都・室町に「白露化粧品店」を開き、化粧水の調合を始める。" },
+        { y: "1951", t: "株式会社として設立。屋号を EARTH に改め、基礎化粧品の全国出荷を開始。" },
+        { y: "1968", t: "東京・日本橋の百貨店に初のカウンターを開設。" },
+        { y: "1971", t: "京都・山科に EARTH 基礎研究所を設立。角層研究に着手。" },
+        { y: "1988", t: "パリとニューヨークに販売拠点を開設し、海外展開を始める。" },
+        { y: "2003", t: "フレグランス部門を独立。第一作「檜雨」を発表。" },
+        { y: "2019", t: "全原料のトレーサビリティ開示を開始。" },
+        { y: "2024", t: "国内二工場の使用電力を再生可能エネルギー100%に切り替え。" }
+      ],
+      locations: [
+        { name: "本社", addr: "京都市中京区室町通四条上る　EARTH ビル" },
+        { name: "東京支社", addr: "東京都中央区日本橋室町二丁目" },
+        { name: "EARTH 基礎研究所", addr: "京都市山科区東野" },
+        { name: "山科工場", addr: "京都市山科区勧修寺" },
+        { name: "大津第二工場", addr: "滋賀県大津市晴嵐" },
+        { name: "海外拠点", addr: "パリ／ニューヨーク／上海／シンガポール" }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
